@@ -1,9 +1,9 @@
 from django.forms import ModelForm
-from student.models import Frencise
+from franchise.models import Franchise
 
 class FranciseForm(ModelForm):
     class Meta:
-        model = Frencise
+        model = Franchise
         fields = [
             'centre_name',
             'address1',
