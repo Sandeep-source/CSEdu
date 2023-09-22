@@ -16,3 +16,14 @@ class Franchise(models.Model):
     phone_number = models.CharField(max_length=13)
     head_email_address = models.EmailField(max_length=254)
 
+class Teacher(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    highest_qualification = models.CharField(max_length=100)
+    field_of_study = models.CharField(max_length=100)
+    profile = models.CharField(max_length=200)
+    
+    
+
+
+
