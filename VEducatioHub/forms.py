@@ -1,10 +1,10 @@
-from django.forms import ModelForm
+from django import forms
 from franchise.models import Franchise
 
-class FranciseForm(ModelForm):
+class FranciseForm(forms.ModelForm):
     class Meta:
         model = Franchise
-        fields = [
+        fields = (
             'centre_name',
             'address1',
             'address2',
@@ -15,4 +15,10 @@ class FranciseForm(ModelForm):
             'head_name',
             'phone_number',
             'head_email_address'
-        ]
+        )
+        widgets  = {
+            'centre_name': forms.TextInput(attrs={'class':'form-control',"label":"Hello"})
+        }
+        labels = {
+            "centre_name": "Hello"
+        }
