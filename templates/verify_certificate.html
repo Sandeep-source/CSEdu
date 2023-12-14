@@ -9,7 +9,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="text-center">
-          <img src="./images/logos/it_logo.jpg"
+          <img src="{% static 'images/logos/it_logo.jpg' %}"
             style="width: 185px;" alt="logo">
           <div class="mt-1 mb-5 pb-1"></div>
         </div>
@@ -23,7 +23,7 @@
               <input type="text" class="form-control" id="certificateNumber" required>
             </div>
             <button type="button" class="btn btn-primary" onclick="verifyCertificate()">Verify Certificate</button>
-            <a href="index.html" style="color: white; text-decoration: none;"><button type="button" class="btn btn-secondary">Back To Home</button></a>
+            <a href="/" style="color: white; text-decoration: none;"><button type="button" class="btn btn-secondary">Back To Home</button></a>
 
           </form>
 

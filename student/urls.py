@@ -8,4 +8,7 @@ urlpatterns = [
     path('logout',logout),
     path('signup',signup),
     path('purchase',purchase),
+    path('Scit_Student_forget',forget_password),
+    path('verify_certificate',verify_certificate),
+
 ]

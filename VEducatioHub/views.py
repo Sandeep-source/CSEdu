@@ -14,6 +14,11 @@ def home_dark(request):
 def about(request):
     return render(request,"it_about.html")
 
+def contact(request):
+    return render(request,"it_contact.html")
+
 def scit_print(request):
     return render(request,"Scit_print.html")
 
+def courses_list(req):
+    return render(req,'Scit_courses_list.html')

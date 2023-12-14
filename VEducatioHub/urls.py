@@ -21,10 +21,12 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
+    path('Scit_courses_list',courses_list),
     path('home/',home),
     path('home_dark',home_dark),
     path('about',about),
     path('Scit_print',scit_print),
+    path('contact',contact),
     path('student/',include('student.urls')),
     path('franchise/',include("franchise.urls")),  
 ]

@@ -4,10 +4,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
-    return HttpResponse("<h1> franchise home")
+    return render(request,'Scit_FranchiseDashboard.html')
 
 def login(request):
-    return HttpResponse("<h1> franchise login")
+    return render(request,'Scit_Franchies_login.html')
 
 def logout(request):
     return HttpResponse("<h1> franchise logout")
