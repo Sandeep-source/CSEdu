@@ -11,17 +11,23 @@ class Franchise(models.Model):
     city = models.CharField(max_length=50)
     state  = models.CharField(max_length=50)
     pincode = models.CharField(max_length=6)
+    office_image = models.ImageField(null=True, blank=True, upload_to='images/franchise/')
     email = models.EmailField(max_length=254)
     head_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=13)
     head_email_address = models.EmailField(max_length=254)
+    def __str__(self):
+        return f"{self.centre_name} - {self.city},{self.state}"
+
 
 class Teacher(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     highest_qualification = models.CharField(max_length=100)
     field_of_study = models.CharField(max_length=100)
-    profile = models.CharField(max_length=200)
+    profile = models.ImageField(null=True, blank=True, upload_to='images/profiles/teachers/')
+    def __str__(self):
+        return f"{self.name} - {self.field_of_study}"
     
     
 

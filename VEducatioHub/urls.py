@@ -17,16 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('',index),
     path('Scit_courses_list',courses_list),
-    path('home/',home),
+    path('home',home),
     path('home_dark',home_dark),
+    path("superuser/",include("superuser.urls")),
     path('about',about),
     path('Scit_print',scit_print),
     path('contact',contact),
     path('student/',include('student.urls')),
     path('franchise/',include("franchise.urls")),  
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

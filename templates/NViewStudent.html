@@ -14,7 +14,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Registred Student</h1>
               <ol class="breadcrumb">
-                <li><a href="/View_courses">Back</a></li>
+                <li><a href="/superuser/">Back</a></li>
                 <li class="active">Scit Students</li>
               </ol>
             </div>
@@ -25,5 +25,54 @@
   </div>
 </div>
 <!-- end inner page banner -->
+
+<div class="row container offset-md-3">
+  <form method="POST"class="row container" >
+  {% csrf_token %}
+    <div class="col-md-6 p-3">
+  </div>
+  <select class="m-1 col-md-1 dropdown dropdown-toggle btn btn-secondary" size=1 name="emails" id="emails" multiple></select>
+    <div class="col-md-4 p-3">
+        <input type="submit" formaction="/superuser/delete_student" class="btn btn-secondary" value="Delete"/>
+        <input type="submit" formaction="/superuser/enroll_student" class="btn btn-secondary" value="Add Student"/>
+    </div>
+</form>
+</div>
+
+<!-- Add this section to your existing HTML -->
+<div class="section padding_layout_1 service_list">
+  <div class="container">
+    {% for student in students %}
+    <div class="row offset-md-2 p-3" style="box-shadow:2px 2px 4px #afafaf;border-radius:5px" id="displayedCourses">
+      <div class="col-md-2">
+         <input class="form-check-input" type="checkbox" onclick="addToList('{{student.email}}')" value="{{student.email}}"/>
+      </div>
+      <div class="col-md-10">
+        {{student.name}} - {{student.email}}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+
+emails = []
+
+function addToList(email){
+   var items = document.getElementById("emails");
+   if(emails.includes(email)){
+     items.remove(email);
+     emails = emails.filter(item => item !== email)
+   }else{ 
+    var option = document.createElement("option");
+    emails.push(email);
+    option.selected = true;
+    option.text = email;
+    items.add(option);
+   }
+
+  }
+
+</script>
 
 {% endblock body %}

@@ -39,7 +39,8 @@
               </div>
               <div class="col-md-6 offset-md-3">
                 <h1 class="text-center">Admin Portal</h1>
-                <form action="login.php" method="post">
+                <form action="/superuser/login" method="post">
+                  {% csrf_token %}
                   <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" class="form-control" id="username" name="username" required>

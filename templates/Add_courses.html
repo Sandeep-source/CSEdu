@@ -15,7 +15,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Add New Course</h1>
               <ol class="breadcrumb">
-                <li><a href="/View_courses">Back</a></li>
+                <li><a href="/superuser/view_courses">Back</a></li>
                 <li class="active">Add Course</li>
               </ol>
             </div>
@@ -44,8 +44,14 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <form id="courseAddForm" enctype="multipart/form-data">
-          <div class="mb-3">
+        <form id="courseAddForm" action="/superuser/add_course" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          {{ form.errors }}
+          <table>
+              {{ form.as_table }}
+          </table>
+          <input type="submit" class="btn btn-primary" value="Submit"/>
+          {% comment %} <div class="mb-3">
             <label for="courseId" class="form-label">Course ID:</label>
             <input type="text" class="form-control" id="courseId" name="courseId" required>
           </div>
@@ -63,7 +69,7 @@
           </div>
           <div class="mb-3">
             <button type="button" class="btn btn-primary" onclick="addCourse()">Add Course</button>
-          </div>
+          </div> {% endcomment %}
         </form>
       </div>
     </div>

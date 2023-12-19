@@ -29,66 +29,19 @@
 <div class="section padding_layout_1 service_list">
   <div class="container">
     <div class="row">
+      {% for course in courses %}
       <div class="col-md-4 service_blog margin_bottom_50">
         <div class="full">
-          <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/ADCA.jpg' %}" alt="#" /> </div>
+          <div class="service_img"> <img class="img-responsive" src="{{course.tumbnail}}" alt="#" /> </div>
           <div class="service_cont">
-            <h3 class="service_head">Advanced Diploma in Computer Applications</h3>
-            <p>Course duration of 12 months</p>
+            <h3 class="service_head">{{course.name}}</h3>
+            <p>{{course.details}}</p>
             <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4 service_blog margin_bottom_50">
-        <div class="full">
-          <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/CCC.jpg' %}" alt="#" /> </div>
-          <div class="service_cont">
-            <h3 class="service_head">Course on Computer Concepts</h3>
-            <p>Course duration of 12 months</p>
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 service_blog margin_bottom_50">
-        <div class="full">
-          <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/DCA.jpg' %}" alt="#" /> </div>
-          <div class="service_cont">
-            <h3 class="service_head">Diploma in Computer Applications.</h3>
-            <p>Course duration of 6 months</p>
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 service_blog margin_bottom_50">
-        <div class="full">
-          <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/DTP.jpg' %}" alt="#" /> </div>
-          <div class="service_cont">
-            <h3 class="service_head">Diploma in Desktop Publishing</h3>
-            <p>Course duration of 6 months</p>
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 service_blog margin_bottom_50">
-        <div class="full">
-          <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/O level.jpg' %}" alt="#" /> </div>
-          <div class="service_cont">
-            <h3 class="service_head">'O' Level</h3>
-            <p>Course duration of 12 months</p>
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 service_blog margin_bottom_50">
-        <div class="full">
-          <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/Other.jpg' %}" alt="#" /> </div>
-          <div class="service_cont">
-            <h3 class="service_head">Other</h3>
-            <p>The duration of a course can vary depending on other program</p>
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
+
     </div>
   </div>
 </div>

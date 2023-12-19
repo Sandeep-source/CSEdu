@@ -26,16 +26,21 @@
 </div>
 <!-- end inner page banner -->
 
-
+<div class="row">
+  <div class="col-md-2 offset-md-10">
+    <a href="/superuser/logout" class="btn btn-primary"> Logout </a>
+  </div>
+</div>
 <!-- Admin managent start-->
 <div class="section padding_layout_1 service_list">
   <div class="container">
+    
     <div class="row">
       <div class="col-md-4 service_blog margin_bottom_50">
         <div class="full">
           <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/student.jpg' %}" alt="#" /> </div>
           <div class="service_cont">
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="/NViewStudent">Manage Student</a> </div>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/superuser/manage_student">Manage Student</a> </div>
           </div>
         </div>
       </div>
@@ -43,7 +48,7 @@
         <div class="full">
           <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/institute.jpg' %}" alt="#" /> </div>
           <div class="service_cont">
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="/other_view">Manage Institute</a> </div>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/superuser/institute">Manage Institute</a> </div>
           </div>
         </div>
       </div>
@@ -51,7 +56,7 @@
         <div class="full">
           <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/certificate.jpg' %}" alt="#" /> </div>
           <div class="service_cont">
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="/certificate">Issue Certificate</a> </div>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/superuser/certificate">Issue Certificate</a> </div>
           </div>
         </div>
       </div>
@@ -59,7 +64,7 @@
         <div class="full">
           <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/coursescert.jpg' %}" alt="#" /> </div>
           <div class="service_cont">
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="/View_courses">Manage Courses</a></div>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/superuser/view_courses">Manage Courses</a></div>
           </div>
         </div>
       </div>
@@ -67,7 +72,7 @@
         <div class="full">
           <div class="service_img"> <img class="img-responsive" src="{% static 'images/ScitImages/enrollcourses.jpg' %}" alt="#" /> </div>
           <div class="service_cont">
-            <div class="bt_cont"> <a class="btn sqaure_bt" href="/Enroll_stu_in_courses">Enroll Student In Courses</a> </div>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/superuser/enroll_student">Enroll Student In Courses</a> </div>
           </div>
         </div>
       </div>

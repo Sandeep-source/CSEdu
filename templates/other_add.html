@@ -14,7 +14,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Add New Institute</h1>
               <ol class="breadcrumb">
-                <li><a href="#">Back</a></li>
+                <li><a href="/superuser/institute">Back</a></li>
                 <li class="active">Institute</li>
               </ol>
             </div>
@@ -29,43 +29,15 @@
 <!--Institute reg Form-->
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 m-4 p-4">
       <section class="pt-4">
-        <form>
-          <div class="mb-3">
-            <label for="institutionID" class="form-label">Institution ID:</label>
-            <input type="text" class="form-control" id="institutionID" name="institutionID" placeholder="Enter Institution ID" required>
-          </div>
-          <div class="mb-3">
-            <label for="institutionName" class="form-label">Institution Name:</label>
-            <input type="text" class="form-control" id="institutionName" name="institutionName" placeholder="Enter Institution Name" required>
-          </div>
-          <div class="mb-3">
-            <label for="institutionAddress" class="form-label">Address:</label>
-            <textarea class="form-control" id="institutionAddress" name="institutionAddress" rows="3" placeholder="Enter Institution Address" required></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="contactPerson" class="form-label">Contact Person:</label>
-            <input type="text" class="form-control" id="contactPerson" name="contactPerson" placeholder="Enter Contact Person's Name" required>
-          </div>
-          <div class="mb-3">
-            <label for="contactEmail" class="form-label">Contact Email:</label>
-            <input type="email" class="form-control" id="contactEmail" name="contactEmail" placeholder="Enter Contact Email" required>
-          </div>
-          <div class="mb-3">
-            <label for="mobileNumber" class="form-label">Mobile Number:</label>
-            <input type="tel" class="form-control" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number" required>
-          </div>
-          <div class="mb-3">
-            <label for="institutionDescription" class="form-label">Brief Description:</label>
-            <textarea class="form-control" id="institutionDescription" name="institutionDescription" rows="4" placeholder="Enter a Brief Description of the Institution" required></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="documentUpload" class="form-label">Upload Documents:</label>
-            <input type="file" class="form-control" id="documentUpload" name="documentUpload" accept=".pdf, .doc, .docx" required>
-            <small class="form-text text-muted">Upload relevant documents in PDF or Word format.</small>
-          </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+        <form id="courseAddForm" action="/superuser/add_institute" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          {{ form.errors }}
+          <table>
+              {{ form.as_table }}
+          </table>
+          <input type="submit" class="btn btn-primary" value="Submit"/>
         </form>
       </section>
     </div>

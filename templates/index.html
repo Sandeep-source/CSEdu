@@ -264,60 +264,17 @@
     <div class="row">
       <div class="col-md-8">
         <div class="row">
+          {% for course in courses %}
           <div class="col-md-4">
             <div class="full">
               <div class="service_blog_inner">
-                <div class="text_align_left"><img src="{% static 'images/ScitImages/ADCA250.jpg' %}" alt="#" /></div>
-                <h4 class="service-heading">Advanced Diploma in Computer Applications</h4>
-                <p>Course duration of 12 months</p>
+                <div class="text_align_left"><img width="250" height="250" src="{{course.tumbnail}}" alt="#" /></div>
+                <h4 class="service-heading">{{course.name}}</h4>
+                <p>{{course.details}}</p>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="full">
-              <div class="service_blog_inner">
-                <div class="text_align_left"><img src="{% static 'images/ScitImages/ccc250.jpg' %}" alt="#" /></div>
-                <h4 class="service-heading">Course on Computer Concepts</h4>
-                <p>Course duration of 12 months</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="full">
-              <div class="service_blog_inner">
-                <div class="text_align_left"><img src="{% static 'images/ScitImages/dca250.jpg' %}" alt="#" /></div>
-                <h4 class="service-heading">Diploma in Computer Applications.</h4>
-                <p>Course duration of 6 months</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="full">
-              <div class="service_blog_inner">
-                <div class="text_align_left"><img src="{% static 'images/ScitImages/DTP250.jpg' %}" alt="#" /></div>
-                <h4 class="service-heading">Diploma in Desktop Publishing</h4>
-                <p>Course duration of 6 months</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="full">
-              <div class="service_blog_inner">
-                <div class="text_align_left"><img src="{% static 'images/ScitImages/o_level250.jpg' %}" alt="#" /></div>
-                <h4 class="service-heading">'O' Level</h4>
-                <p>Course duration of 12 months</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="full">
-              <div class="service_blog_inner">
-                <div class="text_align_left"><img src="{% static 'images/ScitImages/other250.jpg' %}" alt="#" /></div>
-                <h4 class="service-heading">Other</h4>
-                <p>The duration of a course can vary depending on other program</p>
-              </div>
-            </div>
-          </div>
+          </div> 
+          {% endfor %}
         </div>
       </div>
     </div>

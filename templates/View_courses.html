@@ -14,7 +14,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Available Courses</h1>
               <ol class="breadcrumb">
-                <li><a href="/View_courses.">View Courses</a></li>
+                <li><a href="/superuser/">Back</a></li>
                 <li class="active">Total Courses List</li>
               </ol>
             </div>
@@ -30,16 +30,41 @@
 <div class="section padding_layout_1 service_list">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <div class="full">
           <div class="main_heading text_align_left">
             <h2>All Courses</h2>
           </div>
         </div>
       </div>
+      <div class="col-md-2">
+        <a href="/superuser/add_course" class="btn btn-secondary" >Add Courses</a>
+      </div>
     </div>
     <div class="row" id="displayedCourses">
       <!-- Displayed Courses Section -->
+      
+<!-- section -->
+<div class="section padding_layout_1 service_list">
+  <div class="container">
+    <div class="row">
+      {% for course in courses %}
+      <div class="col-md-4 service_blog margin_bottom_50">
+        <div class="full">
+          <div class="service_img"> <img class="img-responsive" src="/{{course.tumbnail}}" alt="{{course.name}}" /> </div>
+          <div class="service_cont">
+            <h3 class="service_head">{{course.name}}</h3>
+            <p>{{course.details}}</p>
+            <div class="bt_cont"> <a class="btn sqaure_bt" href="/superuser/delete_course?id={{course.id}}">Delete Course</a> </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+<!-- end section -->
       <!-- Courses added using the addCourse function will appear here -->
     </div>
   </div>

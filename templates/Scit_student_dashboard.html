@@ -24,6 +24,30 @@
     </div>
   </div>
 </div>
+<div class="section padding_layout_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row  mb-2 ">
+          <div class="h3 text-dark col-md-10">Yours Courses</div>
+          <div class="col-md-2"><a href="/student/logout">Logout</div>
+        </div>
+        <div class="full row">
+            {% for course in courses %}
+                <div class="col-md-10 offset-md-2">
+                  <div class="col-md-7 text-dark">{{course.name}}</div>
+                  {% if course.src %}
+                  <divc class="col-md-2"><a class="btn btn-success" href="{{course.src}}">Download Certificate</a></div>
+                  {% else %}
+                  <divc class="col-md-2"><a class=" btn btn-secondary" disabled>Download Certificate</a></div>
+                  {% endif %}
+                </div>
+            {% endfor %}  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock body %}

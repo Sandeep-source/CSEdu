@@ -14,8 +14,8 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Registred Institute</h1>
               <ol class="breadcrumb">
-                <li><a href="/View_courses">Partner Institute</a></li>
-                <li class="active">Institute</li>
+                <li><a href="/superuser/">Back</a></li>
+                <li class="active">Partner Institute</li>
               </ol>
             </div>
           </div>
@@ -39,27 +39,36 @@
 
       <!-- View Registered Institutes Section -->
       <section class="pt-4">
-        <h2>Registered Institutes</h2>
+        <div class="row">
+          <div class="col-md-10">
+            <h2>Registered Institutes</h2>
+          </div>
+          <div class="col-md-2">
+            <a href="/superuser/add_institute" class="btn btn-secondary" >Add Institute</a>
+          </div>
+        </div>
 
         <!-- Replace with actual data from your backend for each registered institute -->
+        {% for franchise in franchises %}
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">Institution 1</h5>
-            <p class="card-text"><strong>Institution ID:</strong> ABC123</p>
-            <p class="card-text"><strong>Contact Person:</strong> John Doe</p>
-            <p class="card-text"><strong>Contact Email:</strong> john@example.com</p>
-            <p class="card-text"><strong>Mobile Number:</strong> 123-456-7890</p>
-            <p class="card-text"><strong>Address:</strong> 123 Main St, Cityville</p>
+            <p class="card-text"><strong>Institution ID:</strong> {{franchise.id}}</p>
+            <p class="card-text"><strong>Contact Person:</strong> {{franchise.head_name}}</p>
+            <p class="card-text"><strong>Contact Email:</strong> {{franchise.email}}</p>
+            <p class="card-text"><strong>Mobile Number:</strong> {{franchise.phone_number}}</p>
+            <p class="card-text"><strong>Address:</strong> {{franchise.address1}}, {{franchise.address2}}, {{city}}, {{state}}</p>
             <p class="card-text"><strong>Brief Description:</strong> A brief description of the institution.</p>
             <!-- Add more details as needed -->
 
             <!-- Action buttons for each institute -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <button class="btn btn-primary me-md-2">View Details</button>
-              <button class="btn btn-danger">Delete</button>
+              <a href="/superuser/delete_institute?id={{franchise.id}}" class="btn btn-danger">Delete</a>
             </div>
           </div>
         </div>
+        {% endfor %}
 
         <!-- Add more card elements for additional registered institutes -->
       </section>
