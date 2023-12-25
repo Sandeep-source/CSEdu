@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 
@@ -16,6 +17,15 @@ class Student(models.Model):
         ordering = ['-id']
     def __str__(self):
         return f"{self.name} - {self.email}"
+    def delete(self, *args, **kwargs):
+        # Delete the associated image file before deleting the model instance
+        if self.image:
+            if os.path.isfile(self.image.path):
+                try:
+                   os.remove(self.image.path)
+                except Exception as e:
+                   print(e)
+        super(Student, self).delete(*args, **kwargs)
 
 class Enrollment(models.Model):
     student_id = models.ForeignKey("student.Student", on_delete=models.CASCADE, to_field="id")
@@ -23,6 +33,7 @@ class Enrollment(models.Model):
 
     def __str__(self):
         return f"{self.student_id} - {self.course_id}"
+    
 
 class Course(models.Model):
     id = models.AutoField(primary_key=True)
@@ -33,6 +44,15 @@ class Course(models.Model):
     category = models.CharField(max_length=50)
     def __str__(self):
         return f"{self.name} - {self.category}"
+    def delete(self, *args, **kwargs):
+        # Delete the associated image file before deleting the model instance
+        if self.tumbnail:
+            if os.path.isfile(self.tumbnail.path):
+                try:
+                   os.remove(self.tumbnail.path)
+                except Exception as e:
+                   print(e)
+        super(Course, self).delete(*args, **kwargs)
 
 class Certificate(models.Model):
     id = models.AutoField(primary_key=True)
@@ -42,6 +62,16 @@ class Certificate(models.Model):
     src = models.ImageField(null=True, blank=True, upload_to='images/certificates/')
     def __str__(self):
         return f"{self.Student_id} - {self.Course_id}"
+    
+    def delete(self, *args, **kwargs):
+        # Delete the associated image file before deleting the model instance
+        if self.src:
+            if os.path.isfile(self.src.path):
+                try:
+                   os.remove(self.src.path)
+                except Exception as e:
+                   print(e)
+        super(Certificate, self).delete(*args, **kwargs)
 
 class Contact(models.Model):
     id = models.AutoField(primary_key=True)

@@ -95,6 +95,7 @@ Manage Student -
                 <a class="btn btn-primary me-md-2 mr-2" href="/superuser/update_student?id={{student.id}}">View or update</a>
                   
                 <form method="POST" action="/superuser/delete_student" onsubmit="return verify()" style="display:inline-block">
+                  {% csrf_token %}
                   <input type="hidden" name="id" value="{{student.id}}"/>
                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
