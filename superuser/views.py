@@ -113,7 +113,7 @@ def add_course(request):
         form.save()
         form = CourseForm(None) 
         success = True
-    return render(request,"add_courses.html",context={"form":form,"success":success})
+    return render(request,"Add_courses.html",context={"form":form,"success":success})
 
 @user_passes_test(lambda user: user.is_superuser)
 def add_institute(request):
