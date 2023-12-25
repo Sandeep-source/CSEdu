@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Contacts - 
+{% endblock%}
+
+{% block body %}
+
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="full">
+          <div class="title-holder">
+            <div class="title-holder-cell text-left">
+              <h1 class="page-title">Contact messages</h1>
+              <ol class="breadcrumb">
+                <li><a href="/superuser/">Back</a></li>
+                <li class="active">Contacts</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row p-4">
+
+<div class="container">
+  <table class="table ">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">email</th>
+        <th scope="col">phone</th>
+        <th scope="col">Message</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if contacts %}
+      {% for contact in contacts %}
+      <tr>
+        <td>{{contact.first_name}} {{contact.last_name}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.message}}</td>
+        <td>{{contact.phone}}</td>
+        <td> 
+          <a href="mailto:{{contact.email}}" class="btn-secondary" style="display:inline-block;padding:6px;border-radius:4px">Mail</a>
+          {% if not contact.resolved %}
+          <a href="/superuser/resolved_contact?id={{contact.id}}" class="btn-secondary" style="display:inline-block;padding:6px;border-radius:4px">Resolve</a>
+          {% endif %}
+          <a href="tel:{{contact.phone}}" class="btn-secondary" style="display:inline-block;padding:6px;border-radius:4px">Call</a>
+          <form method="POST" action="/superuser/delete_contact" onsubmit="return verify()" style="display:inline-block">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{contact.id}}"/>
+             <button type="submit" style="display:inline-block;padding:4px;border-radius:4px" class="btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center">All issued resolved</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  {% comment %} {% for Enroll in contacts %}
+  <div class="row">
+    <div class="col-md-8 m-4">
+      {{Enroll.student_id.name}} - {{Enroll.course_id.name}}
+    </div>
+    <div class="col-md-2">
+      <a class="btn btn-danger text-white">Delete</a>
+    </div>
+    </div>
+  </div>
+  {% endfor %} {% endcomment %}
+</div>
+
+</div>
+
+
+<script>
+  function verify(){
+     var c = prompt("This action is irreversible. Are you sure to delete this issue? Type 'Delete' to verify.")
+     if(c=="Delete"){
+      return true;
+     }else{
+      return false;
+     }
+  
+  }
+  </script>
+{% endblock body %}

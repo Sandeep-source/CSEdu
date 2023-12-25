@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Update Courses - 
+{% endblock%}
+
+{% block body %}
+
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="full">
+          <div class="title-holder">
+            <div class="title-holder-cell text-left">
+              <h1 class="page-title">Update Course</h1>
+              <ol class="breadcrumb">
+                <li><a href="/superuser/view_courses">Back</a></li>
+                <li class="active">Update Course</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- end inner page banner -->
+
+<!--Add Courses-->
+<div class="section padding_layout_1 service_list">
+  <div class="container">
+    <!-- Course Add Section -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="full">
+          <div class="main_heading text_align_left">
+            <h2>Update Course</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {% if updated %}
+        <p class="alert alert-success"> Course Updated Successfully </p>
+        {% endif %}
+        <form id="courseAddForm" class="django-form"  action="/superuser/update_course?id={{id}}" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          {{ form.errors }}
+          <table>
+              {{ form.as_table }}
+          </table>
+          <input type="submit" class="btn btn-primary" value="Update"/>
+          {% comment %} <div class="mb-3">
+            <label for="courseId" class="form-label">Course ID:</label>
+            <input type="text" class="form-control" id="courseId" name="courseId" required>
+          </div>
+          <div class="mb-3">
+            <label for="courseName" class="form-label">Course Name:</label>
+            <input type="text" class="form-control" id="courseName" name="courseName" required>
+          </div>
+          <div class="mb-3">
+            <label for="courseDuration" class="form-label">Course Duration:</label>
+            <input type="text" class="form-control" id="courseDuration" name="courseDuration" required>
+          </div>
+          <div class="mb-3">
+            <label for="courseImage" class="form-label">Upload Course Image:</label>
+            <input type="file" class="form-control" id="courseImage" name="courseImage" accept="image/*" required>
+          </div>
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary" onclick="addCourse()">Add Course</button>
+          </div> {% endcomment %}
+        </form>
+      </div>
+    </div>
+
+    <!-- Displayed Courses Section -->
+    <div class="row" id="displayedCourses">
+      <!-- Add dynamic course elements here -->
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to add a new course to the displayed section
+  function addCourse() {
+    // Get form data
+    var courseId = document.getElementById('courseId').value;
+    var courseName = document.getElementById('courseName').value;
+    var courseDuration = document.getElementById('courseDuration').value;
+    var courseImageInput = document.getElementById('courseImage');
+
+    // Validate form data
+    if (!courseId || !courseName || !courseDuration || !courseImageInput.files[0]) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    // Create a new course element
+    var newCourseElement = document.createElement('div');
+    newCourseElement.className = 'col-md-4 service_blog margin_bottom_50';
+    newCourseElement.innerHTML = `
+      <div class="full">
+        <div class="service_img"> <img class="img-responsive" src="${URL.createObjectURL(courseImageInput.files[0])}" alt="${courseName}" /> </div>
+        <div class="service_cont">
+          <h3 class="service_head">${courseName}</h3>
+          <p>Course ID: ${courseId}</p>
+          <p>Course duration of ${courseDuration}</p>
+          <div class="bt_cont"> <a class="btn sqaure_bt" href="#" onclick="alert('Visit at Institute')">Enroll Course</a> </div>
+        </div>
+      </div>
+    `;
+
+    // Append the new course element to the displayed courses section
+    var displayedCoursesSection = document.getElementById('displayedCourses');
+    displayedCoursesSection.appendChild(newCourseElement);
+
+    // Clear the form fields
+    document.getElementById('courseId').value = '';
+    document.getElementById('courseName').value = '';
+    document.getElementById('courseDuration').value = '';
+    document.getElementById('courseImage').value = ''; // Clearing the input value doesn't work for file inputs, so leave it unchanged
+  }
+</script>
+
+
+
+{% endblock body %}
+
+

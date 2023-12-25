@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Update institute - 
+{% endblock%}
+
+{% block body %}
+
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="full">
+          <div class="title-holder">
+            <div class="title-holder-cell text-left">
+              <h1 class="page-title">Update Institute</h1>
+              <ol class="breadcrumb">
+                <li><a href="/superuser/institute">Back</a></li>
+                <li class="active">Institute</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end inner page banner -->
+
+<!--Institute reg Form-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 m-4 p-4">
+      <section class="pt-4">
+        <form id="courseAddForm" class="django-form" action="/superuser/update_institute?id={{id}}" enctype="multipart/form-data" method="post">
+          {% csrf_token %}
+          {{ form.errors }}
+          <table>
+              {{ form.as_table }}
+          </table>
+          <input type="submit" class="btn btn-primary" value="Submit"/>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock body %}
+
+
