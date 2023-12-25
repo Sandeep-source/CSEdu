@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+Certificates - 
+{% endblock%}
 
 {% load static %}
 
@@ -14,7 +17,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Issued Certificate</h1>
               <ol class="breadcrumb">
-                <li><a href="/">Back</a></li>
+                <li><a href="/superuser/">Back</a></li>
                 <li class="active">Issued Certificate</li>
               </ol>
             </div>
@@ -30,23 +33,65 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <section class="pt-4">
-        <form>
-          <div class="mb-3">
-            <label for="rollNo" class="form-label">Roll No:</label>
-            <input type="text" class="form-control" id="rollNo" name="rollNo" placeholder="Enter Roll No">
-          </div>
-          <div class="mb-3">
-            <label for="imageInput" class="form-label">Image:</label>
-            <input type="file" class="form-control" id="imageInput" name="imageInput">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="col-md-8">
+      <section class="p-4">
+        <form action="/superuser/issue_certificate" class="django-form"  method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.errors }}
+          <table>
+              {{ form.as_table }}
+          </table>
+          <input type="submit" class="btn btn-primary" value="Submit"/>
+      
         </form>
       </section>
     </div>
   </div>
 </div>
+<div class="container pb-4">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Student</th>
+        <th scope="col">Certificate in Course</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if certificates %}
+      {% for certificate in certificates %}
+      <tr>
+        <td>{{certificate.Student_id.name}}</td>
+        <td>{{certificate.Course_id.name}}</td>
+        <td> 
+          
+          <form method="POST" action="/superuser/delete_certificate" onsubmit="return verify()">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{certificate.id}}"/>
+            <a href="/{{certificate.src}}" style="display:inline-block;padding:6px;border-radius:4px" class="small-btn btn-secondary" download> Download </a> 
+            <input type="Submit" style="display:inline-block" class="btn btn-danger btn-secondary text-white btn-sm" value="Delete"/>
+          </form>  
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center">No certificate issued</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<script>
+function verify(){
+   var c = prompt("This action is irreversible. Are you sure to delete this certificate? Type 'Yes' to verify.")
+   if(c=="Yes"){
+    return true;
+   }else{
+    return false;
+   }
 
+}
+</script>
 
 {% endblock body %}

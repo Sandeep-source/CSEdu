@@ -2,6 +2,9 @@
 
 {% load static %}
 
+{% block title %}
+Manage Courses - 
+{% endblock%}
 
 {% block body %}
 
@@ -44,9 +47,11 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <form id="courseAddForm" action="/superuser/add_course" enctype="multipart/form-data" method="post">
+        {% if success %}
+        <p class="alert alert-success"> Success! Course added successfully.</p>
+        {% endif %}
+        <form id="courseAddForm" class="django-form"  action="/superuser/add_course" enctype="multipart/form-data" method="post">
           {% csrf_token %}
-          {{ form.errors }}
           <table>
               {{ form.as_table }}
           </table>

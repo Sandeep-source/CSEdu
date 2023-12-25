@@ -4800,3 +4800,14 @@ footer ul.social_icons {
 	margin-top: 35px;
 }
 
+.btn-square{
+	font-size: 13px;
+	font-weight: 400;
+	min-width: auto;
+	padding: 0px 20px;
+	height: 45px;
+	background-color: #2f2c2c;
+	line-height: 45px;
+	margin: 33px 0 0 30px;
+}
+

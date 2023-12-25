@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Add admin - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -13,6 +17,10 @@
           <div class="title-holder">
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Add New Admin</h1>
+              <ol class="breadcrumb">
+                <li><a href="/superuser/">Back</a></li>
+                <li class="active">Login</li>
+              </ol>
             </div>
           </div>
         </div>
@@ -21,5 +29,37 @@
   </div>
 </div>
 <!-- end inner page banner -->
+
+
+<div class="section padding_layout_1">
+  <div class="container">
+    <div class="row">
+      {% if success %}
+            {% if message %}
+            <div class="alert alert-danger">
+              <strong>Failed! </strong> {{message}}
+            </div>
+            {% else %}
+            <div class="alert alert-danger">
+              <strong>Success! </strong> Admin added successfully.
+            </div>
+            {% endif %}
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <form method="post" id="form"  class="django-form" action="/superuser/add_admin" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.errors }}
+          <table>
+              {{ form.as_table }}
+          </table>
+          <input type="submit" class="btn btn-primary" value="Submit"/>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</div>
 
 {% endblock body %}

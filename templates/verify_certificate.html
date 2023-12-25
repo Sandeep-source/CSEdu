@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Verify Certificates - 
+{% endblock%}
+
 {% block body %}
 
 <div class="container mt-5">
@@ -17,17 +21,31 @@
           Certificate Verification
         </div>
         <div class="card-body">
-          <form id="verificationForm">
+          <form id="verificationForm" method="POST" action="/student/verify_certificate">
+            {% csrf_token %}
             <div class="form-group">
               <label for="certificateNumber">Enter Certificate Number:</label>
-              <input type="text" class="form-control" id="certificateNumber" required>
+              <input type="text" class="form-control" name="id" required>
             </div>
-            <button type="button" class="btn btn-primary" onclick="verifyCertificate()">Verify Certificate</button>
+            <button type="submit" class="btn btn-primary">Verify Certificate</button>
             <a href="/" style="color: white; text-decoration: none;"><button type="button" class="btn btn-secondary">Back To Home</button></a>
 
           </form>
 
-          <div id="verificationResult" class="mt-3"></div>
+          <div id="verificationResult" class="m-3 text-center">
+            {% if post %}
+            {% if certificate %}
+            <div>
+              <img src="/{{certificate.src}}"/>
+            </div>
+            <div>
+              <a href="/{{certificate.src}}" class="btn btn-primary px-4" download="csit{{certificate.id}}.jpg">Download Certificate</a>
+            </div>
+            {% else %}
+             <p class="alert alert-danger"> Certificate not found.</p>
+            {% endif %}
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -38,38 +56,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-  function verifyCertificate() {
-    // Replace the following URL with your actual server-side endpoint
-    var verificationEndpoint = '/verify-certificate';
-
-    var certificateNumber = $('#certificateNumber').val();
-
-    $.ajax({
-      type: 'POST',
-      url: verificationEndpoint,
-      data: { certificateNumber: certificateNumber },
-      success: function(response) {
-        displayVerificationResult(response);
-      },
-      error: function() {
-        displayVerificationResult('Error during verification. Please try again.');
-      }
-    });
-  }
-
-  function displayVerificationResult(result) {
-    var resultContainer = $('#verificationResult');
-
-    if (result === 'valid') {
-      resultContainer.html('<div class="alert alert-success" role="alert">Certificate is valid!</div>');
-    } else if (result === 'invalid') {
-      resultContainer.html('<div class="alert alert-danger" role="alert">Certificate is invalid.</div>');
-    } else {
-      resultContainer.html('<div class="alert alert-warning" role="alert">' + result + '</div>');
-    }
-  }
-</script>
 
 {% endblock body %}

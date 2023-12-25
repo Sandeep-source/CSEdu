@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Superuser login - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -39,6 +43,9 @@
               </div>
               <div class="col-md-6 offset-md-3">
                 <h1 class="text-center">Admin Portal</h1>
+                {% if message %}
+                <p class="alert alert-danger mt-2"> {{message}} </p>
+                {% endif %}
                 <form action="/superuser/login" method="post">
                   {% csrf_token %}
                   <div class="form-group">
@@ -52,7 +59,7 @@
                   <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </form>
                 <div class="text-center mt-3">
-                  <a href="#">Forgot Password?</a>
+                  <a href="/password_reset/">Forgot Password?</a>
                 </div>
                 <div class="text-center mt-3">
                   <a href="/" class="btn btn-secondary btn-block">Back</a>

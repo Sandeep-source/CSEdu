@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Manage Admins - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -12,7 +16,11 @@
         <div class="full">
           <div class="title-holder">
             <div class="title-holder-cell text-left">
-              <h1 class="page-title">View And Change Admin Password</h1>
+              <h1 class="page-title">Manage admins</h1>
+              <ol class="breadcrumb">
+                <li><a href="/superuser/">Back</a></li>
+                <li class="active">Admins</li>
+              </ol>
             </div>
           </div>
         </div>
@@ -21,5 +29,63 @@
   </div>
 </div>
 <!-- end inner page banner -->
+
+<div class="row container offset-md-8">
+  <div class="col-md-3 m-4">
+    <a href="/superuser/add_admin" class="btn btn-secondary">Add admin</a>
+  </div>
+</div>
+<div class="container pb-4">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Institute</th>
+        <th scope="col">SuperUser</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if admins %}
+      {% for admin in admins %}
+      <tr>
+        <td>{{admin.username}}</td>
+        <td>{{admin.email}}</td>
+        <td>{{admin.last_name}}</td>
+        <td>{{admin.is_superuser}}</td>
+        <td> 
+          <form method="POST" action="/superuser/delete_admin" onsubmit="return verify()" style="display:inline-block">
+            {% csrf_token %}
+            <input type="hidden" name="username" value="{{admin.username}}"/>
+            <button type="submit" style="display:inline-block;padding:6px;border-radius:4px" class=" btn-danger">Delete</button>
+          </form>
+          {% comment %} <form method="POST" action="/superuser/promote_admin" onsubmit="return verify()" style="display:inline-block">
+            <input type="hidden" name="username" value="{{admin.username}}"/>
+            <button type="submit" style="display:inline-block;padding:6px;border-radius:4px" class=" btn-primary">Promote admin</button>
+          </form> </td> {% endcomment %}
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center">No admins added</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function verify(){
+     var c = prompt("This action is irreversible. Are you sure to delete this admin? Type 'Yes' to verify.")
+     if(c=="Yes"){
+      return true;
+     }else{
+      return false;
+     }
+  
+  }
+  </script>
 
 {% endblock body %}

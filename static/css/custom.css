@@ -3,3 +3,9 @@
 -------------------------------------------------------------------*/
 
 /** ADD YOUR AWESOME CODES HERE **/
+
+.small-btn{
+	display:inline-block;
+	padding:6px;
+	border-radius:4px
+}

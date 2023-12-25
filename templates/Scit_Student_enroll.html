@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Enrolled Students and courses - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -14,7 +18,7 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Enrolled Courses</h1>
               <ol class="breadcrumb">
-                <li><a href="/View_courses">Back</a></li>
+                <li><a href="/superuser/">Back</a></li>
                 <li class="active">Courses</li>
               </ol>
             </div>
@@ -25,5 +29,61 @@
   </div>
 </div>
 <!-- end inner page banner -->
+
+<div class="row container offset-md-3">
+  <form id="courseAddForm" class="django-form m-4"  action="/superuser/enroll_student" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form.errors }}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" class="btn btn-primary" value="Submit"/>
+  </form>
+</div>
+<div class="container pb-4">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Student</th>
+        <th scope="col">Course</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if enrollments %}
+      {% for enrollment in enrollments %}
+      <tr>
+        <td>{{enrollment.student_id}}</td>
+        <td>{{enrollment.course_id}}</td>
+        <td> 
+          <form method="POST" action="/superuser/delete_enroll" onsubmit="return verify()" style="display:inline-block">
+            {% csrf_token %}
+             <input type="hidden" name="id" value="{{enrollment.id}}"/>
+             <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center">No student enrolled</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+
+<script>
+  function verify(){
+     var c = prompt("This action is irreversible. Are you sure to delete this Enrollment? Type 'Delete' to verify.")
+     if(c=="Delete"){
+      return true;
+     }else{
+      return false;
+     }
+  
+  }
+  </script>
 
 {% endblock body %}

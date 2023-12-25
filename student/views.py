@@ -14,6 +14,15 @@ def home(request):
     return render(request,'Scit_student_dashboard.html',context={"courses":courses_pursued})
 
 def verify_certificate(request):
+    if request.method=="POST":
+        certificate_no = request.POST["id"]
+        print("NO",certificate_no)
+        try:
+            certificate = Certificate.objects.get(certificate_no=certificate_no)
+            return render(request,'verify_certificate.html',context={"post":True,"certificate":certificate})
+        except Exception as e:
+            print(e)
+            return render(request,'verify_certificate.html',context={"post":True})
     return render(request,'verify_certificate.html')
 
 def login(request):

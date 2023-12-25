@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Manage Institute - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -52,8 +56,8 @@
         {% for franchise in franchises %}
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">Institution 1</h5>
-            <p class="card-text"><strong>Institution ID:</strong> {{franchise.id}}</p>
+            <h5 class="card-title">Institution {{franchise.id}}</h5>
+            <p class="card-text"><strong>Institute Name:</strong> {{franchise.centre_name}}</p>
             <p class="card-text"><strong>Contact Person:</strong> {{franchise.head_name}}</p>
             <p class="card-text"><strong>Contact Email:</strong> {{franchise.email}}</p>
             <p class="card-text"><strong>Mobile Number:</strong> {{franchise.phone_number}}</p>
@@ -63,9 +67,12 @@
 
             <!-- Action buttons for each institute -->
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary me-md-2">View Details</button>
-              <a href="/superuser/delete_institute?id={{franchise.id}}" class="btn btn-danger">Delete</a>
-            </div>
+              <a class="btn btn-primary me-md-2 mr-2" href="/superuser/update_institute?id={{franchise.id}}">View or update</a>
+                <form method="POST" action="/superuser/delete_institute" onsubmit="return verify()" style="display:inline-block">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{franchise.id}}"/>
+                   <button type="submit" class="btn btn-danger">Delete</button>
+                </form></div>
           </div>
         </div>
         {% endfor %}
@@ -76,6 +83,19 @@
   </div>
 </div>
 
+
+
+<script>
+  function verify(){
+     var c = prompt("This action is irreversible. Are you sure to delete this Institute? Type 'Delete' to verify.")
+     if(c=="Delete"){
+      return true;
+     }else{
+      return false;
+     }
+  
+  }
+  </script>
 
 {% endblock body %}
 

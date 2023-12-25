@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Franchise(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     centre_name = models.CharField(max_length=100)
     address1 = models.CharField(max_length=50)
     address2 = models.CharField(max_length=50)
@@ -18,7 +18,8 @@ class Franchise(models.Model):
     head_email_address = models.EmailField(max_length=254)
     def __str__(self):
         return f"{self.centre_name} - {self.city},{self.state}"
-
+    class Meta:
+        ordering = ['-id']
 
 class Teacher(models.Model):
     id = models.AutoField(primary_key=True)

@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Manage Student - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -14,7 +18,9 @@
             <div class="title-holder-cell text-left">
               <h1 class="page-title">Registred Student</h1>
               <ol class="breadcrumb">
+                {% if user.is_superuser %}
                 <li><a href="/superuser/">Back</a></li>
+                {% endif %}
                 <li class="active">Scit Students</li>
               </ol>
             </div>
@@ -27,52 +33,95 @@
 <!-- end inner page banner -->
 
 <div class="row container offset-md-3">
-  <form method="POST"class="row container" >
-  {% csrf_token %}
+  <div class="row container" >
     <div class="col-md-6 p-3">
-  </div>
-  <select class="m-1 col-md-1 dropdown dropdown-toggle btn btn-secondary" size=1 name="emails" id="emails" multiple></select>
-    <div class="col-md-4 p-3">
-        <input type="submit" formaction="/superuser/delete_student" class="btn btn-secondary" value="Delete"/>
-        <input type="submit" formaction="/superuser/enroll_student" class="btn btn-secondary" value="Add Student"/>
+      {% if user.is_superuser %}
+      <form action="/superuser/manage_student" method="GET">
+        {% csrf_token %}
+        <label for="institute" class="h5 text-dark"> Institute: </label>
+        <select name="institute" id="institute" class="btn btn-secondary dropdown-toggle mr-3 w-25">
+          <option value=0>All</option>
+          {% for institute in institutes %}
+          <option value="{{institute.id}}" {% if selected_institute == institute.id %} selected {% endif %}>{{institute}}</option>
+          {% endfor %}
+        </select>
+        <label for="status" class="h5 text-dark"> Status: </label>
+        <select name="status" id="status" class="btn btn-secondary dropdown-toggle">
+          <option value="" {% if status == "" %} selected {% endif %} >All</option>
+          <option value="APPROVED" {% if status == "APPROVED" %} selected {% endif %}>APPROVED</option>
+          <option value="NOT APPROVED" {% if status == "NOT APPROVED" %} selected {% endif %}>NOT APPROVED</option>
+        </select>
+        <input type="submit" class="btn btn-secondary m-2" value="Filter"/>
+      </form>
+      {% endif %}
     </div>
-</form>
+    <div {% if user.is_superuser %}  class="col-md-2 offset-md-2" {% else %}  class="col-md-4" {% endif %}>
+        <a href="/superuser/add_student" class="btn btn-secondary">Add Student</a>
+        {% if not user.is_superuser %}
+        <a href="/superuser/logout" class="btn btn-danger"> Logout </a>
+        {% endif %}
+    </div>
+  </div>
 </div>
 
 <!-- Add this section to your existing HTML -->
 <div class="section padding_layout_1 service_list">
   <div class="container">
+    {% if students %}
     {% for student in students %}
-    <div class="row offset-md-2 p-3" style="box-shadow:2px 2px 4px #afafaf;border-radius:5px" id="displayedCourses">
-      <div class="col-md-2">
-         <input class="form-check-input" type="checkbox" onclick="addToList('{{student.email}}')" value="{{student.email}}"/>
-      </div>
-      <div class="col-md-10">
-        {{student.name}} - {{student.email}}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Student ID: SCITST{{student.id}}</h5>
+        <div class="row">
+           <div class="col-md-3">
+            <img src="/{{student.image}}" alt="{{student.name}}" style="display:flex;max-width:250px;max-height:250px;"/>
+           </div>
+           <div class="col-md-9">
+              <p class="card-text"><strong>Name:</strong> {{student.name}}</p>
+              <p class="card-text"><strong>Contact Email:</strong> {{student.email}}</p>
+              <p class="card-text"><strong>Mobile Number:</strong> {{student.phone}}</p>
+              <p class="card-text"><strong>Dob:</strong> {{student.dob}}</p>
+              <p class="card-text"><strong>Gender:</strong> {{student.gender}}</p>
+              <p class="card-text"><strong>Institute:</strong> {{student.institute}}</p>
+              <p class="card-text"><strong>Status:</strong> {{student.status}}</p>
+              <!-- Add more details as needed -->
+
+              <!-- Action buttons for each institute -->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                {% if user.is_superuser %}
+                {% if student.status == "NOT APPROVED" or student.status == "" %}
+                <a class="btn btn-primary me-md-2 mr-2" href="/superuser/approve_student?id={{student.id}}">Approve Student</a>
+                {% endif %}
+                <a class="btn btn-primary me-md-2 mr-2" href="/superuser/update_student?id={{student.id}}">View or update</a>
+                  
+                <form method="POST" action="/superuser/delete_student" onsubmit="return verify()" style="display:inline-block">
+                  <input type="hidden" name="id" value="{{student.id}}"/>
+                   <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                {% endif %}
+              </div>
+           </div>
+        </div>
       </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div class="card mb-3">
+     <p class="alert alert-secondary">No students found.</p>
+    </div>
+    {% endif %}
   </div>
 </div>
 <script>
-
-emails = []
-
-function addToList(email){
-   var items = document.getElementById("emails");
-   if(emails.includes(email)){
-     items.remove(email);
-     emails = emails.filter(item => item !== email)
-   }else{ 
-    var option = document.createElement("option");
-    emails.push(email);
-    option.selected = true;
-    option.text = email;
-    items.add(option);
-   }
-
-  }
-
-</script>
+    function verify(){
+       var c = prompt("This action is irreversible. Are you sure to delete this student? Type 'Delete' to verify.")
+       if(c=="Delete"){
+        return true;
+       }else{
+        return false;
+       }
+    
+    }
+    </script>
 
 {% endblock body %}

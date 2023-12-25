@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+Add institute - 
+{% endblock%}
+
 {% block body %}
 
 <!-- inner page banner -->
@@ -31,7 +35,10 @@
   <div class="row justify-content-center">
     <div class="col-md-8 m-4 p-4">
       <section class="pt-4">
-        <form id="courseAddForm" action="/superuser/add_institute" enctype="multipart/form-data" method="post">
+        {% if success %}
+        <p class="alert alert-success">Institute added successfully</p>
+        {% endif %}
+        <form id="courseAddForm" class="django-form" action="/superuser/add_institute" enctype="multipart/form-data" method="post">
           {% csrf_token %}
           {{ form.errors }}
           <table>
