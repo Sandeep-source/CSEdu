@@ -70,7 +70,6 @@ Certificates -
           <form method="POST" action="/superuser/delete_certificate" onsubmit="return verify()">
             {% csrf_token %}
             <input type="hidden" name="id" value="{{certificate.id}}"/>
-            <a href="/{{certificate.src}}" style="display:inline-block;padding:6px;border-radius:4px" class="small-btn btn-secondary" download> Download </a> 
             <input type="Submit" style="display:inline-block" class="btn btn-danger btn-secondary text-white btn-sm" value="Delete"/>
           </form>  
         </td>
