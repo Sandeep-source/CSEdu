@@ -13,7 +13,7 @@ class FranchiseForm(forms.ModelForm):
     class Meta:
         model = Franchise
         fields = '__all__' 
-        exclude = ["id"]
+        exclude = ["id","office_image"]
 
 class UserForm(UserCreationForm):
     institute = forms.ModelChoiceField(queryset=Franchise.objects.all())

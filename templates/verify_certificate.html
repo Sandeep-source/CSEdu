@@ -36,10 +36,19 @@ Verify Certificates -
             {% if post %}
             {% if certificate %}
             <div>
-              <img src="/{{certificate.src}}"/>
-            </div>
-            <div>
-              <a href="/{{certificate.src}}" class="btn btn-primary px-4" download="csit{{certificate.id}}.jpg">Download Certificate</a>
+              <p>Dear {{certificate.Student_id.name}},</p>
+              <p>Congratulations on successfully verifying your certificate for the course "<strong>{{certificate.Course_id.name}}</strong>." We are thrilled to recognize and celebrate your achievement.</p>
+              <p>Your dedication and hard work have paid off, and we commend you on this remarkable accomplishment. Your commitment to learning and growth is truly commendable.</p>
+              <h2>Certificate Details:</h2>
+              <ul>
+                  <li><strong>Student Name:</strong> {{certificate.Student_id.name}}</li>
+                  <li><strong>Course:</strong> {{certificate.Course_id.name}}</li>
+                  <li><strong>Certificate Number:</strong> {{certificate.certificate_no}}</li>
+              </ul>
+              <p>We believe this certification will serve as a testament to your skills and knowledge in [Course Topic/Area], and we hope it opens doors to new opportunities in your professional journey.</p>
+              <p>Once again, congratulations on this milestone! We wish you continued success in all your future endeavors.</p>
+              <p>Best regards,</p>
+              <p>SCIT Computer Institute</p>
             </div>
             {% else %}
              <p class="alert alert-danger"> Certificate not found.</p>

@@ -30,6 +30,7 @@ class CertificateForm(ModelForm):
     class Meta:
         model = Certificate
         fields = '__all__'
+        exclude = ['src']
     def __init__(self, *args, **kwargs):
         super(CertificateForm, self).__init__(*args, **kwargs)
         self.fields['Student_id'].queryset = Student.objects.filter(status='APPROVED')
