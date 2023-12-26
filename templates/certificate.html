@@ -52,6 +52,7 @@ Certificates -
   <table class="table">
     <thead class="thead-light">
       <tr>
+        <th scope="col">Certicate no</th>
         <th scope="col">Student</th>
         <th scope="col">Certificate in Course</th>
         <th scope="col">Action</th>
@@ -61,6 +62,7 @@ Certificates -
       {% if certificates %}
       {% for certificate in certificates %}
       <tr>
+        <td>{{certificate.certificate_no}}</td>
         <td>{{certificate.Student_id.name}}</td>
         <td>{{certificate.Course_id.name}}</td>
         <td> 
